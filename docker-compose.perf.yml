@@ -1,0 +1,17 @@
+ma version: '3.8'
+
+services:
+  perf:
+    build: ./perf
+    links:
+      - nginx
+      - graphite
+    depends_on:
+      - api
+      - nginx
+      - graphite
+    environment:
+      - TARGET_HOST=nginx
+      - STATSD_HOST=graphite
+      - STATSD_PORT=8125
+    command: ["npm", "run", "api"]

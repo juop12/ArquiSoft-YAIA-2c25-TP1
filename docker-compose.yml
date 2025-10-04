@@ -38,9 +38,23 @@ services:
             - "8080:8080"
         volumes:
             - "/:/rootfs:ro"
-            - "/var/run:/var/run:rw"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
             - "/sys:/sys:ro"
             - "/var/lib/docker/:/var/lib/docker:ro"
+
+    perf:
+        build: ./perf
+        links:
+            - nginx
+            - graphite
+        depends_on:
+            - api
+            - nginx
+            - graphite
+        environment:
+            - TARGET_HOST=nginx
+            - STATSD_HOST=graphite
+            - STATSD_PORT=8125
 
 volumes:
     grafana_config:
