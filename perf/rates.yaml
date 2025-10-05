@@ -1,10 +1,10 @@
 config:
   environments:
     api:
-      target: 'http://nginx'
+      target: 'http://localhost:5555'
       plugins:
         statsd:
-          host: graphite
+          host: localhost
           port: 8125
           prefix: "artillery-api"
 
