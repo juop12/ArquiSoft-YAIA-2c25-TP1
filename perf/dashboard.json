@@ -1018,28 +1018,22 @@
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
-          "selected": false,
-          "text": "artillery-exchange",
-          "value": "artillery-exchange"
+          "text": "",
+          "value": ""
         },
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
+        "definition": "",
         "label": "Server",
-        "multi": false,
         "name": "server",
-        "options": [
-          {
-            "selected": true,
-            "text": "artillery-exchange",
-            "value": "artillery-exchange"
-          }
-        ],
-        "query": "artillery-exchange",
-        "skipUrlSync": false,
-        "type": "custom"
+        "options": [],
+        "query": {
+          "queryType": "Default",
+          "refId": "A",
+          "target": "stats.gauges.*"
+        },
+        "refresh": 1,
+        "regex": "/stats\\.gauges\\.([^.]+)/",
+        "type": "query"
       },
       {
         "allValue": null,
