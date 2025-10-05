@@ -11,6 +11,7 @@ RUN npm install
 # Copy test files
 COPY *.yaml ./
 COPY *.sh ./
+COPY perf/*.yaml ./
 
 # Make script executable
 RUN chmod +x run-scenario.sh

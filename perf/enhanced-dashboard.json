@@ -518,17 +518,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.gauges.arvault.exchange.volume.USD, 'USD Volume')"
+          "target": "alias(stats.counters.$server.exchange.volume.USD, 'USD Volume')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.gauges.arvault.exchange.volume.ARS, 'ARS Volume')"
+          "target": "alias(stats.counters.$server.exchange.volume.ARS, 'ARS Volume')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.gauges.arvault.exchange.volume.EUR, 'EUR Volume')"
+          "target": "alias(stats.counters.$server.exchange.volume.EUR, 'EUR Volume')"
         }
       ],
       "thresholds": [],
@@ -628,17 +628,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.gauges.arvault.exchange.net.USD, 'USD Net')"
+          "target": "alias(stats.gauges.$server.exchange.net.USD, 'USD Net')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.gauges.arvault.exchange.net.ARS, 'ARS Net')"
+          "target": "alias(stats.gauges.$server.exchange.net.ARS, 'ARS Net')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.gauges.arvault.exchange.net.EUR, 'EUR Net')"
+          "target": "alias(stats.gauges.$server.exchange.net.EUR, 'EUR Net')"
         }
       ],
       "thresholds": [],
@@ -741,12 +741,12 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.arvault.exchange.successful, 'Successful Exchanges')"
+          "target": "alias(stats.counters.$server.exchange.successful, 'Successful Exchanges')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.arvault.exchange.failed, 'Failed Exchanges')"
+          "target": "alias(stats.counters.$server.exchange.failed, 'Failed Exchanges')"
         }
       ],
       "thresholds": [],
@@ -846,17 +846,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.gauges.arvault.exchange.rate.USD_ARS, 'USD/ARS Rate')"
+          "target": "alias(stats.gauges.$server.exchange.rate.USD_ARS, 'USD/ARS Rate')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.gauges.arvault.exchange.rate.ARS_USD, 'ARS/USD Rate')"
+          "target": "alias(stats.gauges.$server.exchange.rate.ARS_USD, 'ARS/USD Rate')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.gauges.arvault.exchange.rate.USD_EUR, 'USD/EUR Rate')"
+          "target": "alias(stats.gauges.$server.exchange.rate.USD_EUR, 'USD/EUR Rate')"
         }
       ],
       "thresholds": [],
@@ -956,17 +956,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.timers.arvault.exchange.duration.mean, 'Mean Exchange Duration')"
+          "target": "alias(stats.timers.$server.exchange.duration.mean, 'Mean Exchange Duration')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.timers.arvault.exchange.duration.p95, '95th Percentile')"
+          "target": "alias(stats.timers.$server.exchange.duration.p95, '95th Percentile')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.timers.arvault.exchange.duration.max, 'Max Duration')"
+          "target": "alias(stats.timers.$server.exchange.duration.max, 'Max Duration')"
         }
       ],
       "thresholds": [],

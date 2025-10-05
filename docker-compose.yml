@@ -1,6 +1,11 @@
 services:
     api:
       build: ./app
+      environment:
+        - STATSD_HOST=graphite
+        - STATSD_PORT=8125
+      links:
+        - graphite
 
     nginx:
         image: nginx:1.27.4
