@@ -16,6 +16,15 @@ up:
 	@echo "cAdvisor: $(CADVISOR_URL)"
 	@echo ""
 
+setup-dashboard: ## Updates the datasource UID in the Grafana dashboard
+	@./scripts/update-dashboard-datasource.sh
+
+import-dashboard: ## Imports the updated dashboard to Grafana automatically
+	@./scripts/import-dashboard.sh
+
+full-setup: up setup-dashboard import-dashboard ## Deploys the entire system and configures Grafana automatically
+	@echo "System fully configured."
+
 down:
 	@echo "Stopping all services..."
 	docker-compose down
