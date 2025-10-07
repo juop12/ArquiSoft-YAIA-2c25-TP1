@@ -693,20 +693,23 @@
     "list": [
       {
         "current": {
-          "text": "artillery-api",
-          "value": "artillery-api"
+          "text": "All",
+          "value": "$__all"
         },
-        "includeAll": false,
+        "includeAll": true,
         "name": "server",
-        "options": [
-          {
-            "selected": true,
-            "text": "artillery-api",
-            "value": "artillery-api"
-          }
-        ],
-        "query": "artillery-api",
-        "type": "custom"
+        "options": [],
+        "query": "stats.gauges.*",
+        "type": "query",
+        "datasource": {
+          "type": "graphite",
+          "uid": "cf02s3v5a9r7kb"
+        },
+        "regex": "",
+        "allValue": "*",
+        "refresh": 2,
+        "sort": 1,
+        "multi": true
       },
       {
         "current": {
