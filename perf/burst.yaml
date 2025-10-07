@@ -1,0 +1,53 @@
+config:
+  environments:
+    api:
+      target: 'http://localhost:5555'
+      timeout: 30
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-burst"
+
+  pool: 200
+  http:
+    timeout: 30
+    connectionTimeout: 10
+
+  phases:
+    - name: Calm
+      duration: 30
+      arrivalRate: 2
+    - name: Burst1
+      duration: 15
+      arrivalRate: 2
+      rampTo: 40
+    - name: Recovery1
+      duration: 45
+      arrivalRate: 40
+      rampTo: 5
+    - name: Calm2
+      duration: 30
+      arrivalRate: 5
+    - name: Burst2
+      duration: 20
+      arrivalRate: 5
+      rampTo: 60
+    - name: Recovery2
+      duration: 60
+      arrivalRate: 60
+      rampTo: 2
+    
+
+scenarios:
+  - name: Burst Rates
+    weight: 80
+    flow:
+      - get:
+          url: '/rates'
+          
+  - name: Burst Accounts
+    weight: 20
+    flow:
+      - get:
+          url: '/accounts'

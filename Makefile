@@ -57,3 +57,19 @@ test:
 test-rates:
 	@echo "Testing endpoint /rates..."
 	cd perf && npm run api
+
+test-baseline:
+	@echo "Running baseline performance test..."
+	cd perf && npm run baseline
+
+test-stress:
+	@echo "Running stress test..."
+	cd perf && npm run stress
+
+test-exchange:
+	@echo "Running exchange operations test..."
+	cd perf && npm run exchange
+
+test-burst:
+	@echo "Running burst traffic test..."
+	cd perf && npm run burst
