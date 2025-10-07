@@ -1,10 +1,15 @@
-.PHONY: up down restart build logs test
+.PHONY: help up down restart build logs test
 
 COMPOSE_FILE := docker-compose.yml
 APP_URL := http://localhost:5555
 GRAFANA_URL := http://localhost:80
 GRAPHITE_URL := http://localhost:8090
 CADVISOR_URL := http://localhost:8080
+
+help:
+	@echo "ArVault Exchange System - Available commands:"
+	@echo ""
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 __WORKFLOW__:
 up:
