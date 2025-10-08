@@ -4,7 +4,7 @@
       {
         "datasource": {
           "type": "graphite",
-          "uid": "ff027gte9a9kwc"
+          "uid": "cf02s3v5a9r7kb"
         },
         "enable": true,
         "hide": false,
@@ -41,7 +41,7 @@
     {
       "datasource": {
         "type": "graphite",
-        "uid": "ff027gte9a9kwc"
+        "uid": "cf02s3v5a9r7kb"
       },
       "fieldConfig": {
         "defaults": {
@@ -152,7 +152,7 @@
     {
       "datasource": {
         "type": "graphite",
-        "uid": "ff027gte9a9kwc"
+        "uid": "cf02s3v5a9r7kb"
       },
       "fieldConfig": {
         "defaults": {
@@ -302,7 +302,7 @@
         {
           "datasource": {
             "type": "graphite",
-            "uid": "ff027gte9a9kwc"
+            "uid": "cf02s3v5a9r7kb"
           },
           "hide": false,
           "refCount": 0,
@@ -313,7 +313,7 @@
         {
           "datasource": {
             "type": "graphite",
-            "uid": "ff027gte9a9kwc"
+            "uid": "cf02s3v5a9r7kb"
           },
           "hide": false,
           "refCount": 0,
@@ -365,7 +365,7 @@
     {
       "datasource": {
         "type": "graphite",
-        "uid": "ff027gte9a9kwc"
+        "uid": "cf02s3v5a9r7kb"
       },
       "fieldConfig": {
         "defaults": {
@@ -427,7 +427,7 @@
     {
       "datasource": {
         "type": "graphite",
-        "uid": "ff027gte9a9kwc"
+        "uid": "cf02s3v5a9r7kb"
       },
       "fieldConfig": {
         "defaults": {
@@ -541,7 +541,7 @@
         {
           "datasource": {
             "type": "graphite",
-            "uid": "ff027gte9a9kwc"
+            "uid": "cf02s3v5a9r7kb"
           },
           "hide": false,
           "refCount": 0,
@@ -552,7 +552,7 @@
         {
           "datasource": {
             "type": "graphite",
-            "uid": "ff027gte9a9kwc"
+            "uid": "cf02s3v5a9r7kb"
           },
           "hide": false,
           "refCount": 0,
@@ -583,7 +583,7 @@
     {
       "datasource": {
         "type": "graphite",
-        "uid": "ff027gte9a9kwc"
+        "uid": "cf02s3v5a9r7kb"
       },
       "fieldConfig": {
         "defaults": {
@@ -706,7 +706,7 @@
     {
       "datasource": {
         "type": "graphite",
-        "uid": "ff027gte9a9kwc"
+        "uid": "cf02s3v5a9r7kb"
       },
       "fieldConfig": {
         "defaults": {
@@ -1773,7 +1773,7 @@
         },
         "datasource": {
           "type": "graphite",
-          "uid": "ff027gte9a9kwc"
+          "uid": "cf02s3v5a9r7kb"
         },
         "includeAll": true,
         "multi": true,

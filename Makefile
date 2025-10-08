@@ -1,6 +1,6 @@
 .PHONY: help up down restart build logs test
 
-COMPOSE_FILE := docker-compose.yml
+COMPOSE_FILE := docker compose.yml
 APP_URL := http://localhost:5555
 GRAFANA_URL := http://localhost:80
 GRAPHITE_URL := http://localhost:8090
@@ -13,7 +13,7 @@ help:
 
 __WORKFLOW__:
 up:
-	docker-compose up -d --build
+	docker compose up -d --build
 	@echo "System up!"
 	@echo "API: $(APP_URL)"
 	@echo "Grafana: $(GRAFANA_URL)"
@@ -32,21 +32,21 @@ full-setup: up setup-dashboard import-dashboard ## Deploys the entire system and
 
 down:
 	@echo "Stopping all services..."
-	docker-compose down
+	docker compose down
 	@echo "System down!"
 
 restart:
 	@echo "Restarting system..."
-	docker-compose restart
+	docker compose restart
 	@echo "System restarted!"
 
 build:
 	@echo "Rebuilding application..."
-	docker-compose build --no-cache api
+	docker compose build --no-cache api
 	@echo "Build completed!"
 
 logs:
-	docker-compose logs -f
+	docker compose logs -f
 
 __TESTING__:
 

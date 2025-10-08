@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "artillery": "artillery",
-    "api": "artillery run rates.yaml -e api",
-    "scenario": "./run-scenario.sh",
-    "baseline": "artillery run baseline.yaml -e api",
-    "stress": "artillery run stress.yaml -e api",
-    "exchange": "artillery run exchange.yaml -e api",
-    "burst": "artillery run burst.yaml -e api",
-    "business": "artillery run business-metrics.yaml -e api"
+    "api": "artillery run scenarios/rates.yaml -e api",
+    "scenario": "./scripts/run-scenario.sh",
+    "baseline": "artillery run scenarios/baseline.yaml -e api",
+    "stress": "artillery run scenarios/stress.yaml -e api",
+    "exchange": "artillery run scenarios/exchange.yaml -e api",
+    "burst": "artillery run scenarios/burst.yaml -e api",
+    "business": "artillery run scenarios/business-metrics.yaml -e api"
   },
   "author": "",
   "license": "ISC",
