@@ -2,28 +2,8 @@
   "annotations": {
     "list": [
       {
-        "datasource": {
-          "type": "graphite",
-          "uid": "cf02s3v5a9r7kb"
-        },
-        "enable": true,
-        "hide": false,
-        "iconColor": "green",
-        "name": "New annotation",
-        "target": {
-          "fromAnnotations": true,
-          "queryType": "tags",
-          "tags": [
-            ""
-          ]
-        }
-      },
-      {
         "builtIn": 1,
-        "datasource": {
-          "type": "datasource",
-          "uid": "grafana"
-        },
+        "datasource": "-- Grafana --",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -33,71 +13,26 @@
     ]
   },
   "editable": true,
-  "fiscalYearStartMonth": 0,
+  "gnetId": null,
   "graphTooltip": 0,
-  "id": 14,
+  "id": 1,
+  "iteration": 1616712956688,
   "links": [],
   "panels": [
     {
-      "datasource": {
-        "type": "graphite",
-        "uid": "cf02s3v5a9r7kb"
-      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Graphite",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "custom": {}
         },
         "overrides": []
       },
+      "fill": 7,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -125,700 +60,21 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
+        "alertThreshold": true
       },
-      "pluginVersion": "11.5.2",
+      "percentage": false,
+      "pluginVersion": "7.3.10",
+      "pointradius": 5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
       "targets": [
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(\n  sumSeries(stats.gauges.$server.codes.2*, stats.gauges.$server.codes.4*, stats.gauges.$server.codes.5*),\n  'RPS'\n)\n",
-          "textEditor": true
-        }
-      ],
-      "title": "RPS (Resquests per second)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "graphite",
-        "uid": "cf02s3v5a9r7kb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 70,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 12,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "always",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "5xx"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "2xx"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Completed"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Pending"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#447EBC",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 8,
-        "y": 0
-      },
-      "id": 5,
-      "options": {
-        "alertThreshold": true,
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 250
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "cf02s3v5a9r7kb"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "E",
-          "target": "alias(sumSeries(stats.gauges.$server.codes.4*), '4xx')",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "cf02s3v5a9r7kb"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "F",
-          "target": "alias(sumSeries(stats.gauges.$server.codes.5*), '5xx')",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "hide": true,
-          "refCount": 0,
-          "refId": "A",
-          "target": "alias(stats.gauges.$server.codes.200, 'Completed')"
-        },
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "B",
-          "target": "alias(sumSeries(stats.gauges.$server.codes.2*), '2xx')",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "C",
-          "target": "alias(stats.gauges.$server.pendingRequests, 'Pending')"
-        },
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "D",
-          "target": "alias(stats.gauges.$server.codes.429, 'Limited')"
-        }
-      ],
-      "title": "Requests state (stacked)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "graphite",
-        "uid": "cf02s3v5a9r7kb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 6,
-        "x": 0,
-        "y": 8
-      },
-      "id": 6,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "hide": false,
-          "refCount": 0,
-          "refId": "A",
-          "target": "alias(\n  diffSeries(\n    constantLine(100),\n    asPercent(\n      sumSeries(stats.gauges.$server.codes.4*, stats.gauges.$server.codes.5*),\n      sumSeries(stats.gauges.$server.codes.2*, stats.gauges.$server.codes.4*, stats.gauges.$server.codes.5*)\n    )\n  ),\n  'Availability %'\n)\n",
-          "textEditor": true
-        }
-      ],
-      "title": "Availability",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "graphite",
-        "uid": "cf02s3v5a9r7kb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": -1,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 6,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "stepAfter",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
-            "pointSize": 12,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 15,
-        "x": 6,
-        "y": 8
-      },
-      "id": 3,
-      "options": {
-        "alertThreshold": true,
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 250
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "cf02s3v5a9r7kb"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "D",
-          "target": "alias(stats.gauges.$server.scenarioDuration.p99, 'p99')",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "cf02s3v5a9r7kb"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "A",
-          "target": "alias(stats.gauges.$server.scenarioDuration.p95, 'p95')",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "refCount": 0,
-          "refId": "C",
-          "target": "alias(stats.gauges.$server.scenarioDuration.max, 'Upper')"
-        },
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "refCount": 0,
-          "refId": "B",
-          "target": "alias(stats.gauges.$server.scenarioDuration.median, 'Median')"
-        }
-      ],
-      "title": "Response time (client-side)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "graphite",
-        "uid": "cf02s3v5a9r7kb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 70,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 12,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "always",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "rps"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 17
-      },
-      "id": 4,
-      "options": {
-        "alertThreshold": true,
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 250
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "refCount": 0,
-          "refId": "B",
-          "target": "aliasByMetric(stats.gauges.$server.scenarioCounts.*)",
-          "textEditor": false
-        }
-      ],
-      "title": "Scenarios launched (stacked)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "graphite",
-        "uid": "cf02s3v5a9r7kb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 70,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 12,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "always",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "rps"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 17
-      },
-      "id": 4,
-      "options": {
-        "alertThreshold": true,
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 250
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "Graphite"
-          },
-          "refCount": 0,
-          "refId": "B",
           "target": "aliasByMetric(stats.gauges.$server.scenarioCounts.*)",
           "textEditor": false
         }
@@ -1262,17 +518,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.gauges.arvault.exchange.volume.USD, 'USD Volume')"
+          "target": "alias(stats.counters.$server.exchange.volume.USD, 'USD Volume')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.gauges.arvault.exchange.volume.ARS, 'ARS Volume')"
+          "target": "alias(stats.counters.$server.exchange.volume.ARS, 'ARS Volume')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.gauges.arvault.exchange.volume.EUR, 'EUR Volume')"
+          "target": "alias(stats.counters.$server.exchange.volume.EUR, 'EUR Volume')"
         }
       ],
       "thresholds": [],
@@ -1372,17 +628,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.gauges.arvault.exchange.net.USD, 'USD Net')"
+          "target": "alias(stats.gauges.$server.exchange.net.USD, 'USD Net')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.gauges.arvault.exchange.net.ARS, 'ARS Net')"
+          "target": "alias(stats.gauges.$server.exchange.net.ARS, 'ARS Net')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.gauges.arvault.exchange.net.EUR, 'EUR Net')"
+          "target": "alias(stats.gauges.$server.exchange.net.EUR, 'EUR Net')"
         }
       ],
       "thresholds": [],
@@ -1485,12 +741,12 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.arvault.exchange.successful, 'Successful Exchanges')"
+          "target": "alias(stats.counters.$server.exchange.successful, 'Successful Exchanges')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.arvault.exchange.failed, 'Failed Exchanges')"
+          "target": "alias(stats.counters.$server.exchange.failed, 'Failed Exchanges')"
         }
       ],
       "thresholds": [],
@@ -1590,17 +846,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.gauges.arvault.exchange.rate.USD_ARS, 'USD/ARS Rate')"
+          "target": "alias(stats.gauges.$server.exchange.rate.USD_ARS, 'USD/ARS Rate')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.gauges.arvault.exchange.rate.ARS_USD, 'ARS/USD Rate')"
+          "target": "alias(stats.gauges.$server.exchange.rate.ARS_USD, 'ARS/USD Rate')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.gauges.arvault.exchange.rate.USD_EUR, 'USD/EUR Rate')"
+          "target": "alias(stats.gauges.$server.exchange.rate.USD_EUR, 'USD/EUR Rate')"
         }
       ],
       "thresholds": [],
@@ -1700,17 +956,17 @@
         {
           "refCount": 0,
           "refId": "A",
-          "target": "alias(stats.timers.arvault.exchange.duration.mean, 'Mean Exchange Duration')"
+          "target": "alias(stats.timers.$server.exchange.duration.mean, 'Mean Exchange Duration')"
         },
         {
           "refCount": 0,
           "refId": "B",
-          "target": "alias(stats.timers.arvault.exchange.duration.p95, '95th Percentile')"
+          "target": "alias(stats.timers.$server.exchange.duration.p95, '95th Percentile')"
         },
         {
           "refCount": 0,
           "refId": "C",
-          "target": "alias(stats.timers.arvault.exchange.duration.max, 'Max Duration')"
+          "target": "alias(stats.timers.$server.exchange.duration.max, 'Max Duration')"
         }
       ],
       "thresholds": [],
@@ -1755,46 +1011,46 @@
       }
     }
   ],
-  "preload": false,
   "refresh": "5s",
-  "schemaVersion": 40,
-  "tags": [],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": ["exchange", "performance", "monitoring"],
   "templating": {
     "list": [
       {
-        "allValue": "*",
         "current": {
-          "text": [
-            "artillery-stress"
-          ],
-          "value": [
-            "artillery-stress"
-          ]
+          "text": "artillery-api",
+          "value": "artillery-api"
         },
-        "datasource": {
-          "type": "graphite",
-          "uid": "cf02s3v5a9r7kb"
-        },
-        "includeAll": true,
-        "multi": true,
+        "definition": "",
+        "label": "Server",
         "name": "server",
         "options": [],
-        "query": "stats.gauges.*",
-        "refresh": 2,
-        "regex": "",
-        "sort": 1,
+        "query": {
+          "queryType": "Default",
+          "refId": "A",
+          "target": "stats.gauges.*"
+        },
+        "refresh": 1,
+        "regex": "/stats\\.gauges\\.([^.]+)/",
         "type": "query"
       },
       {
+        "allValue": null,
         "current": {
-          "text": "exchange_bbox_1",
-          "value": "exchange_bbox_1"
+          "selected": false,
+          "text": "exchange-api-1",
+          "value": "exchange-api-1"
         },
+        "error": null,
+        "hide": 0,
         "includeAll": false,
+        "label": "Container",
+        "multi": false,
         "name": "container",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "exchange-api-1",
             "value": "exchange-api-1"
           },
@@ -1827,14 +1083,11 @@
             "selected": false,
             "text": "exchange-nginx-1",
             "value": "exchange-nginx-1"
-          },
-          {
-            "selected": true,
-            "text": "exchange_bbox_1",
-            "value": "exchange_bbox_1"
           }
         ],
-        "query": "exchange-api-1, exchange-api-2, exchange-api-3, exchange-cadvisor-1, exchange-grafana-1, exchange-graphite-1,  exchange-nginx-1, exchange_bbox_1",
+        "query": "exchange-api-1, exchange-api-2, exchange-api-3, exchange-cadvisor-1, exchange-grafana-1, exchange-graphite-1, exchange-nginx-1",
+        "queryValue": "",
+        "skipUrlSync": false,
         "type": "custom"
       }
     ]
@@ -1843,10 +1096,23 @@
     "from": "now-5m",
     "to": "now"
   },
-  "timepicker": {},
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
+  },
   "timezone": "",
-  "title": "Main dashboard",
-  "uid": "bf0apmc5ljshsa",
-  "version": 2,
-  "weekStart": ""
+  "title": "arVault Exchange Service - Enhanced Dashboard",
+  "uid": "arvault-exchange-enhanced",
+  "version": 1
 }

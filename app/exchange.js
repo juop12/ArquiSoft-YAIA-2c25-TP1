@@ -1,6 +1,14 @@
 import { nanoid } from "nanoid";
+import StatsD from "node-statsd";
 
 import { init as stateInit, getAccounts as stateAccounts, getRates as stateRates, getLog as stateLog } from "./state.js";
+
+// Initialize StatsD client for custom metrics
+const statsd = new StatsD({
+  host: process.env.STATSD_HOST || 'graphite',
+  port: process.env.STATSD_PORT || 8125,
+  prefix: 'arvault.exchange.'
+});
 
 let accounts;
 let rates;
@@ -106,6 +114,31 @@ export async function exchange(exchangeRequest) {
 
   //log the transaction and return it
   log.push(exchangeResult);
+
+  // Send custom metrics for volume and net tracking
+  if (exchangeResult.ok) {
+    // Track successful exchange
+    statsd.increment('successful');
+    
+    // Track volume by currency (both base and counter amounts)
+    statsd.gauge(`volume.${baseCurrency}`, baseAmount);
+    statsd.gauge(`volume.${counterCurrency}`, counterAmount);
+    
+    // Track net position (base currency: positive for incoming, counter currency: negative for outgoing)
+    statsd.gauge(`net.${baseCurrency}`, baseAmount);
+    statsd.gauge(`net.${counterCurrency}`, -counterAmount);
+    
+    // Track exchange rate
+    statsd.gauge(`rate.${baseCurrency}_${counterCurrency}`, exchangeRate);
+    statsd.gauge(`rate.${counterCurrency}_${baseCurrency}`, 1/exchangeRate);
+    
+    // Track exchange duration
+    const duration = Date.now() - new Date(exchangeResult.ts).getTime();
+    statsd.timing('duration', duration);
+  } else {
+    // Track failed exchange
+    statsd.increment('failed');
+  }
 
   return exchangeResult;
 }
