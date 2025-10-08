@@ -17,6 +17,22 @@ const port = 3000;
 
 app.use(express.json());
 
+// HEALTH CHECK endpoint
+app.get("/health", (req, res) => {
+  try {
+    const accounts = getAccounts();
+    const rates = getRates();
+    
+    if (accounts && rates) {
+      res.status(200).json({ status: "healthy", timestamp: new Date().toISOString() });
+    } else {
+      res.status(503).json({ status: "unhealthy", message: "State not initialized" });
+    }
+  } catch (error) {
+    res.status(503).json({ status: "unhealthy", error: error.message });
+  }
+});
+
 // ACCOUNT endpoints
 
 app.get("/accounts", (req, res) => {

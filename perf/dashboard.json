@@ -100,7 +100,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 7,
         "x": 0,
         "y": 0
       },
@@ -274,7 +274,7 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 8,
+        "x": 7,
         "y": 0
       },
       "id": 5,
@@ -390,10 +390,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 6,
-        "x": 0,
-        "y": 8
+        "h": 8,
+        "w": 4,
+        "x": 19,
+        "y": 0
       },
       "id": 6,
       "options": {
@@ -511,9 +511,9 @@
         ]
       },
       "gridPos": {
-        "h": 9,
-        "w": 15,
-        "x": 6,
+        "h": 8,
+        "w": 11,
+        "x": 0,
         "y": 8
       },
       "id": 3,
@@ -664,9 +664,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 17
+        "w": 12,
+        "x": 11,
+        "y": 8
       },
       "id": 4,
       "options": {
@@ -1846,7 +1846,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Main dashboard",
-  "uid": "bf0apmc5ljshsa",
-  "version": 2,
+  "uid": "arxIPammk",
+  "version": 25,
   "weekStart": ""
 }
