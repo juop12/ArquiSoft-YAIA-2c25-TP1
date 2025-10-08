@@ -1,0 +1,515 @@
+{
+  "id": null,
+  "uid": null,
+  "title": "ArVault - Monitoreo Sistema & Negocio",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "5s",
+  "time": { "from": "now-1h", "to": "now" },
+  "templating": {
+    "list": [
+      {
+        "type": "datasource",
+        "name": "DS_GRAPHITE",
+        "query": "graphite",
+        "current": { "text": "Graphite", "value": "Graphite" },
+        "hide": 0
+      },
+      {
+        "type": "query",
+        "name": "artillery_prefix",
+        "label": "Prefijo Artillery",
+        "query": "stats.gauges.*",
+        "current": { "text": "artillery-baseline", "value": "artillery-baseline" },
+        "multi": false,
+        "includeAll": false,
+        "refresh": 2,
+        "sort": 1,
+        "description": "Selecciona el tipo de test de Artillery"
+      },
+      {
+        "type": "custom",
+        "name": "container_name",
+        "label": "Contenedor",
+        "query": "exchange-api-1",
+        "current": { "text": "exchange-api-1", "value": "exchange-api-1" },
+        "multi": false,
+        "description": "Nombre del contenedor de la aplicación"
+      }
+    ]
+  },
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": { "type": "datasource", "uid": "grafana" },
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Anotaciones & alertas",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "row",
+      "title": "Visión general del test",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "type": "stat",
+      "title": "RPS (req/s)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 1 },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "horizontal",
+        "text": {},
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 50 },
+              { "color": "red", "value": 100 }
+            ]
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "stats.gauges.${artillery_prefix}.rps.count" }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Latencia (p95, ms)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 6, "w": 6, "x": 6, "y": 1 },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 500 },
+              { "color": "red", "value": 1000 }
+            ]
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "stats.gauges.${artillery_prefix}.scenarioDuration.p95" }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Error rate (%)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 6, "w": 6, "x": 12, "y": 1 },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "target": "scale(divideSeries(sumSeries(stats.gauges.${artillery_prefix}.codes.{400,401,403,404,408,429,500,502,503,504}), sumSeries(stats.gauges.${artillery_prefix}.codes.{200,400,401,403,404,408,429,500,502,503,504})), 100)"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Usuarios virtuales activos",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 6, "w": 6, "x": 18, "y": 1 },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "stats.gauges.${artillery_prefix}.scenariosCreated" }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Latencia y throughput",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 7 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "type": "timeseries",
+      "title": "Latencia percentiles (ms)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "ms",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "alias(stats.gauges.${artillery_prefix}.scenarioDuration.median,'p50')" },
+        { "refId": "B", "target": "alias(stats.gauges.${artillery_prefix}.scenarioDuration.p95,'p95')" },
+        { "refId": "C", "target": "alias(stats.gauges.${artillery_prefix}.scenarioDuration.p99,'p99')" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Throughput (req/s)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "reqps",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "alias(stats.gauges.${artillery_prefix}.rps.count,'Requests/s')" }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Métricas de sistema (cAdvisor)",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 16 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "type": "timeseries",
+      "title": "CPU % (container)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 17 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "percent",
+          "max": 100,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "alias(movingAverage(stats.gauges.cadvisor.${container_name}.cpu_usage_total,5),'CPU Usage')" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Memoria (container)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 17 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "bytes",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "target": "alias(movingAverage(stats.gauges.cadvisor.${container_name}.memory_usage,5),'Memory Usage (bytes)')"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Red (bytes/s)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 25 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "Bps",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "alias(nonNegativeDerivative(stats.gauges.cadvisor.${container_name}.rx_bytes),'RX')" },
+        { "refId": "B", "target": "alias(nonNegativeDerivative(stats.gauges.cadvisor.${container_name}.tx_bytes),'TX')" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Filesystem Usage (bytes)",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 25 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "bytes",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "alias(stats.gauges.cadvisor.${container_name}.fs_summary.fs_usage,'Filesystem Usage')" },
+        { "refId": "B", "target": "alias(stats.gauges.cadvisor.${container_name}.fs_summary.fs_limit,'Filesystem Limit')" }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Métricas de negocio (ArVault)",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 33 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "type": "bargauge",
+      "title": "Scenarios por tipo",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 34 },
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"],
+          "fields": ""
+        },
+        "showUnfilled": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "short",
+          "custom": {
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false }
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "target": "aliasByNode(stats.gauges.artillery-business.scenarioCounts.*, 2)",
+          "hide": false
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "RPS de negocio",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 34 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "reqps",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "target": "alias(stats.gauges.artillery-business.rps.count,'Business RPS')"
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Calidad de respuesta y errores",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 42 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "type": "timeseries",
+      "title": "Distribución de códigos HTTP",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 43 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "reqps",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "normal", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "alias(stats.gauges.${artillery_prefix}.codes.200,'2xx (Success)')" },
+        { "refId": "B", "target": "alias(constantLine(0),'3xx (Redirect)')" },
+        { "refId": "C", "target": "alias(constantLine(0),'4xx (Client Error)')" },
+        { "refId": "D", "target": "alias(stats.gauges.${artillery_prefix}.codes.500,'5xx (Server Error)')" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Endpoints más utilizados",
+      "datasource": "${DS_GRAPHITE}",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 51 },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "reqps",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "pointSize": 5,
+            "stacking": { "mode": "none", "group": "A" },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "scaleDistribution": { "type": "linear" },
+            "hideFrom": { "legend": false, "tooltip": false, "vis": false },
+            "thresholdsStyle": { "mode": "off" }
+          }
+        }
+      },
+      "targets": [
+        { "refId": "A", "target": "alias(aliasByMetric(stats.gauges.${artillery_prefix}.scenarioCounts.*),'Scenarios')" }
+      ]
+    }
+  ]
+}

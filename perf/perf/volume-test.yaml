@@ -1,0 +1,77 @@
+config:
+  environments:
+    api:
+      target: 'http://nginx'
+      plugins:
+        statsd:
+          host: graphite
+          port: 8125
+          prefix: "artillery-volume"
+
+  pool: 500 # Muchas conexiones concurrentes
+
+  phases:
+    - name: Baseline
+      duration: 30
+      arrivalRate: 10
+    - name: Gradual Increase
+      duration: 180
+      arrivalRate: 10
+      rampTo: 100
+    - name: Sustained High Volume
+      duration: 300
+      arrivalRate: 100
+    - name: Extreme Load
+      duration: 120
+      arrivalRate: 200
+    - name: Burst Test
+      duration: 60
+      arrivalRate: 300
+    - name: Cool Down
+      duration: 60
+      arrivalRate: 20
+
+scenarios:
+  - name: High Volume Exchanges
+    weight: 80
+    flow:
+      - get:
+          url: '/rates'
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: '{{ $pick(["USD", "EUR", "BRL", "ARS"]) }}'
+            counterCurrency: '{{ $pick(["ARS", "USD", "EUR", "BRL"]) }}'
+            baseAmount: '{{ $randomFloat(50, 10000) }}'
+            baseAccountId: '{{ $randomInt(10, 25) }}'
+            counterAccountId: '{{ $randomInt(10, 25) }}'
+          expect:
+            - statusCode: [200, 400, 500]
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: 'ARS'
+            counterCurrency: 'USD'
+            baseAmount: '{{ $randomFloat(1000, 50000) }}'
+            baseAccountId: '{{ $randomInt(10, 25) }}'
+            counterAccountId: '{{ $randomInt(10, 25) }}'
+          expect:
+            - statusCode: [200, 400, 500]
+
+  - name: Rate Queries
+    weight: 15
+    flow:
+      - get:
+          url: '/rates'
+      - get:
+          url: '/rates'
+      - get:
+          url: '/rates'
+
+  - name: Account Monitoring
+    weight: 5
+    flow:
+      - get:
+          url: '/accounts'
+      - get:
+          url: '/log'
