@@ -1,0 +1,52 @@
+config:
+  environments:
+    api:
+      target: 'http://localhost:5555'
+      timeout: 30
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-exchange"
+
+  pool: 75
+  http:
+    timeout: 30
+    connectionTimeout: 10
+
+  phases:
+    - name: Warmup
+      duration: 30
+      arrivalRate: 1
+    - name: Exchange Load
+      duration: 150
+      arrivalRate: 8
+    
+
+scenarios:
+  - name: Exchange Operations
+    weight: 70
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: "{{ $randomItem(['ARS', 'USD', 'EUR', 'BRL']) }}"
+            counterCurrency: "USD"
+            baseAccountId: "{{ $randomItem(['1', '2', '3', '4']) }}"
+            counterAccountId: "2"
+            baseAmount: "{{ $randomItem([1000, 5000, 10000, 50000, 100000]) }}"
+      - think: 1
+      
+  - name: Rate Checks
+    weight: 20
+    flow:
+      - get:
+          url: '/rates'
+      - think: 0.5
+      
+  - name: Account Monitoring
+    weight: 10
+    flow:
+      - get:
+          url: '/accounts'
+      - think: 2

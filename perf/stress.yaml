@@ -1,0 +1,52 @@
+config:
+  environments:
+    api:
+      target: 'http://localhost:5555'
+      timeout: 30
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-stress"
+
+  pool: 100
+  http:
+    timeout: 30
+    connectionTimeout: 10
+
+  phases:
+    - name: Ramp
+      duration: 60
+      arrivalRate: 1
+      rampTo: 20
+    - name: Stress
+      duration: 180
+      arrivalRate: 20
+    - name: Peak
+      duration: 60
+      arrivalRate: 20
+      rampTo: 50
+    - name: Sustain
+      duration: 120
+      arrivalRate: 50
+    
+
+scenarios:
+  - name: High Load Rates
+    weight: 60
+    flow:
+      - get:
+          url: '/rates'
+      - think: 1
+      
+  - name: High Load Mixed
+    weight: 40
+    flow:
+      - get:
+          url: '/accounts'
+      - think: 1
+      - get:
+          url: '/rates'
+      - think: 1
+      - get:
+          url: '/log'
