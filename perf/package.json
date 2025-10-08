@@ -10,7 +10,8 @@
     "baseline": "artillery run baseline.yaml -e api",
     "stress": "artillery run stress.yaml -e api",
     "exchange": "artillery run exchange.yaml -e api",
-    "burst": "artillery run burst.yaml -e api"
+    "burst": "artillery run burst.yaml -e api",
+    "business": "artillery run business-metrics.yaml -e api"
   },
   "author": "",
   "license": "ISC",

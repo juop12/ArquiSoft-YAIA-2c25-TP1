@@ -73,3 +73,7 @@ test-exchange:
 test-burst:
 	@echo "Running burst traffic test..."
 	cd perf && npm run burst
+
+test-business:
+	@echo "Running business metrics test..."
+	cd perf && npm run business

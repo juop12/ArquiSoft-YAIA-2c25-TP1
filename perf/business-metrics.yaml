@@ -1,0 +1,60 @@
+config:
+  environments:
+    api:
+      target: 'http://localhost:5555'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-business"
+
+  http:
+    pool: 50
+
+  variables:
+    accounts: ["1", "2", "3", "4"]
+    currencies: ["ARS", "USD", "EUR", "BRL"]
+    amounts: [1000, 5000, 10000, 50000, 100000]
+
+  phases:
+    - name: Business Warmup
+      duration: 30
+      arrivalRate: 2
+    - name: Business Operations
+      duration: 120
+      arrivalRate: 8
+
+scenarios:
+  - name: Exchange Business Operations
+    weight: 60
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: "{{ currencies }}"
+            counterCurrency: "USD"
+            baseAccountId: "{{ accounts }}"
+            counterAccountId: "2"
+            baseAmount: "{{ amounts }}"
+      - think: 1
+
+  - name: Rate Monitoring
+    weight: 25
+    flow:
+      - get:
+          url: '/rates'
+      - think: 2
+
+  - name: Account Balance Monitoring
+    weight: 10
+    flow:
+      - get:
+          url: '/accounts'
+      - think: 2
+
+  - name: Transaction Log Review
+    weight: 5
+    flow:
+      - get:
+          url: '/log'
+      - think: 1
