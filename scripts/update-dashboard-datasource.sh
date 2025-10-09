@@ -5,8 +5,8 @@ set -e
 GRAFANA_URL=${GRAFANA_URL:-"http://localhost:80"}
 GRAFANA_USER=${GRAFANA_USER:-"admin"}
 GRAFANA_PASS=${GRAFANA_PASS:-"admin"}
-DASHBOARD_FILE="perf/dashboard.json"
-BACKUP_FILE="perf/dashboard.json.backup"
+DASHBOARD_FILE="perf/dashboards/dashboard.json"
+BACKUP_FILE="perf/dashboards/dashboard.json.backup"
 
 echo "Updating datasource UID in dashboard."
 

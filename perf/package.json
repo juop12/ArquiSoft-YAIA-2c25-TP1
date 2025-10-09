@@ -8,7 +8,7 @@
     "api": "artillery run scenarios/rates.yaml -e api",
     "scenario": "./scripts/run-scenario.sh",
     "baseline": "artillery run scenarios/baseline.yaml -e api",
-    "stress": "artillery run scenarios/stress.yaml -e api",
+    "stress": "artillery run scenarios/stress-test.yaml -e api",
     "exchange": "artillery run scenarios/exchange.yaml -e api",
     "burst": "artillery run scenarios/burst.yaml -e api",
     "business": "artillery run scenarios/business-metrics.yaml -e api"

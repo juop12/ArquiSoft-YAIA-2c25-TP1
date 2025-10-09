@@ -1,10 +1,10 @@
 config:
   environments:
     api:
-      target: 'http://nginx'
+      target: 'http://localhost:5555'
       plugins:
         statsd:
-          host: graphite
+          host: localhost
           port: 8125
           prefix: "artillery-stress"
 
@@ -42,10 +42,10 @@ scenarios:
           url: '/exchange'
           json:
             baseCurrency: '{{ $pick(["USD", "EUR", "BRL"]) }}'
-            counterCurrency: '{{ $pick(["ARS", "USD", "EUR", "BRL"]) }}'
+            counterCurrency: '{{ $pick(["ARS"]) }}'
             baseAmount: '{{ $randomFloat(100, 5000) }}'
-            baseAccountId: '{{ $randomInt(10, 20) }}'
-            counterAccountId: '{{ $randomInt(10, 20) }}'
+            baseAccountId: '{{ $randomInt(1, 4) }}'
+            counterAccountId: '{{ $randomInt(1, 4) }}'
           expect:
             - statusCode: [200, 400, 500]
       - post:
@@ -54,8 +54,8 @@ scenarios:
             baseCurrency: 'ARS'
             counterCurrency: 'USD'
             baseAmount: '{{ $randomFloat(10000, 100000) }}'
-            baseAccountId: '{{ $randomInt(10, 20) }}'
-            counterAccountId: '{{ $randomInt(10, 20) }}'
+            baseAccountId: '{{ $randomInt(1, 4) }}'
+            counterAccountId: '{{ $randomInt(1, 4) }}'
           expect:
             - statusCode: [200, 400, 500]
 
