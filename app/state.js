@@ -23,17 +23,9 @@ export async function init() {
   scheduleSave(log, LOG, 1000);
 }
 
-export function getAccounts() {
-  return accounts;
-}
-
-export function getRates() {
-  return rates;
-}
-
-export function getLog() {
-  return log;
-}
+export function getAccounts() { return accounts; }
+export function getRates() { return rates; }
+export function getLog() { return log; }
 
 async function load(fileName) {
   const filePath = path.join(__dirname, fileName);
@@ -62,7 +54,9 @@ async function save(data, fileName) {
 }
 
 function scheduleSave(data, fileName, period) {
-  setInterval(async () => {
-    await save(data, fileName);
-  }, period);
+  if (process.env.STATE_WRITER === "1") {
+    setInterval(async () => {
+      await save(data, fileName);
+    }, period);
+  }
 }

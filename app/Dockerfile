@@ -4,4 +4,4 @@ WORKDIR /opt/app
 COPY * ./
 COPY state ./state
 RUN npm install
-ENTRYPOINT [ "node", "app.js" ]
+ENTRYPOINT [ "node", "cluster.js" ]

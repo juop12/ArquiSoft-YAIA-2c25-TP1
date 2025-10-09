@@ -13,7 +13,7 @@ import {
 await exchangeInit();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -45,11 +45,10 @@ app.put("/accounts/:id/balance", (req, res) => {
 
   if (!accountId || !balance) {
     return res.status(400).json({ error: "Malformed request" });
-  } else {
-    setAccountBalance(accountId, balance);
-
-    res.json(getAccounts());
   }
+
+  setAccountBalance(accountId, Number(balance));
+  res.json(getAccounts());
 });
 
 // RATE endpoints
@@ -64,8 +63,7 @@ app.put("/rates", (req, res) => {
   if (!baseCurrency || !counterCurrency || !rate) {
     return res.status(400).json({ error: "Malformed request" });
   }
-
-  const newRateRequest = { ...req.body };
+  const newRateRequest = { baseCurrency, counterCurrency, rate: Number(rate) };
   setRate(newRateRequest);
 
   res.json(getRates());
@@ -98,18 +96,19 @@ app.post("/exchange", async (req, res) => {
     return res.status(400).json({ error: "Malformed request" });
   }
 
-  const exchangeRequest = { ...req.body };
-  const exchangeResult = await exchange(exchangeRequest);
+  const result = await exchange({
+    baseCurrency,
+    counterCurrency,
+    baseAccountId,
+    counterAccountId,
+    baseAmount: Number(baseAmount),
+  });
 
-  if (exchangeResult.ok) {
-    res.status(200).json(exchangeResult);
-  } else {
-    res.status(500).json(exchangeResult);
-  }
+  res.status(result.ok ? 200 : 500).json(result);
 });
 
 app.listen(port, () => {
-  console.log(`Exchange API listening on port ${port}`);
+  console.log(`[worker ${process.pid}] Exchange API listening on port ${port}`);
 });
 
 export default app;
