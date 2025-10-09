@@ -1,17 +1,21 @@
 {
   "name": "perf",
   "version": "1.0.0",
-  "description": "",
+  "description": "Performance testing with Artillery",
   "main": "index.js",
   "scripts": {
     "artillery": "artillery",
     "api": "artillery run scenarios/rates.yaml -e api",
-    "scenario": "./scripts/run-scenario.sh",
+    "scenario": "./run-scenario.sh",
     "baseline": "artillery run scenarios/baseline.yaml -e api",
     "stress": "artillery run scenarios/stress-test.yaml -e api",
     "exchange": "artillery run scenarios/exchange.yaml -e api",
     "burst": "artillery run scenarios/burst.yaml -e api",
-    "business": "artillery run scenarios/business-metrics.yaml -e api"
+    "business": "artillery run scenarios/business-metrics.yaml -e api",
+    "load": "artillery run scenarios/load-test.yaml -e api",
+    "volume": "artillery run scenarios/volume-test.yaml -e api",
+    "list": "./run-scenario.sh",
+    "help": "echo 'Available commands: npm run [baseline|stress|exchange|burst|business|load|volume|api]' && echo 'Or use: ./run-scenario.sh <scenario-name>'"
   },
   "author": "",
   "license": "ISC",

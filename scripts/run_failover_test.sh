@@ -24,8 +24,8 @@ else
 fi
 
 # ==== Prechequeos ====
-[[ -x "./perf/run-scenario.sh" ]] || { echo "No encuentro ./perf/run-scenario.sh (raíz)."; exit 1; }
-[[ -f "./perf/rates.yaml" ]] || { echo "No encuentro ./perf/rates.yaml (raíz)."; exit 1; }
+[[ -x "./scripts/run-scenario.sh" ]] || { echo "No encuentro ./scripts/run-scenario.sh (raíz)."; exit 1; }
+[[ -f "./perf/scenarios/rates.yaml" ]] || { echo "No encuentro ./perf/scenarios/rates.yaml (raíz)."; exit 1; }
 command -v curl >/dev/null || { echo "curl no encontrado."; exit 1; }
 
 # ==== 1) Levantar todos los contenedores ====
@@ -61,7 +61,7 @@ log "Iniciando prueba de carga con Artillery..."
   if [[ ! -d node_modules ]]; then
     npm ci --silent || npm install --silent
   fi
-  ./run-scenario.sh rates api 2>&1 | tee "../$OUTDIR/artillery.log"
+  ../scripts/run-scenario.sh rates api 2>&1 | tee "../$OUTDIR/artillery.log"
 ) & ART_PID=$!
 
 sleep 2
@@ -178,7 +178,7 @@ $DC ps | tee "$OUTDIR/containers_final.log"
 # ==== 11) Resumen ====
 {
   echo "==== Failover Test Results ===="
-  echo "Command: (cd perf && ./run-scenario.sh rates api)"
+  echo "Command: (cd perf && ../scripts/run-scenario.sh rates api)"
   echo "FAIL_ON: $FAIL_ON (principal detenido)"
   echo "BACKUP_ACTIVE: $BACKUP_ACTIVE (backup tomó control)"
   echo "RECOVERY_START: $RECOVERY_START (principal reiniciado)"

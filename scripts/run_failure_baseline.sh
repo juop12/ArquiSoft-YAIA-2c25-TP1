@@ -23,19 +23,19 @@ else
 fi
 
 # ==== Prechequeos ====
-[[ -x "./perf/run-scenario.sh" ]] || { echo "No encuentro ./perf/run-scenario.sh (raí­z)."; exit 1; }
-[[ -f "./perf/rates.yaml" ]] || { echo "No encuentro ./perf/rates.yaml (raí­z)."; exit 1; }
+[[ -x "./scripts/run-scenario.sh" ]] || { echo "No encuentro ./scripts/run-scenario.sh (raíz)."; exit 1; }
+[[ -f "./perf/scenarios/rates.yaml" ]] || { echo "No encuentro ./perf/scenarios/rates.yaml (raíz)."; exit 1; }
 command -v curl >/dev/null || { echo "curl no encontrado."; exit 1; }
 
 # ==== 1) Iniciar carga dentro de perf/ ====
-log "Preparando perf/ y lanzando ./perf/run-scenario.sh rates api…"
+log "Preparando perf/ y lanzando ./scripts/run-scenario.sh rates api…"
 (
   set -euo pipefail
   cd perf
   if [[ ! -d node_modules ]]; then
     npm ci --silent || npm install --silent
   fi
-  ./run-scenario.sh rates api 2>&1 | tee "../$OUTDIR/artillery.log"
+  ../scripts/run-scenario.sh rates api 2>&1 | tee "../$OUTDIR/artillery.log"
 ) & ART_PID=$!
 
 sleep 2
@@ -109,7 +109,7 @@ fi
 # ==== 8) Resumen ====
 {
   echo "==== Failure baseline ===="
-  echo "Command: (cd perf && ./run-scenario.sh rates api)"
+  echo "Command: (cd perf && ../scripts/run-scenario.sh rates api)"
   echo "FAIL_ON: $FAIL_ON"
   echo "RECOVERY_START: $RECOVERY_START"
   echo "RECOVERED: $RECOVERED"
