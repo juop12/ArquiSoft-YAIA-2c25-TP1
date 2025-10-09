@@ -1,0 +1,808 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "ff027gte9a9kwc"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 24,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "ff027gte9a9kwc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 11,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "A",
+            "target": "alias(stats_counts.arvault.exchange.transactions.ARS, 'ARS')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "B",
+            "target": "alias(stats_counts.arvault.exchange.transactions.USD, 'USD')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "C",
+            "target": "alias(stats_counts.arvault.exchange.transactions.EUR, 'EUR')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "D",
+            "target": "alias(stats_counts.arvault.exchange.transactions.BRL, 'BRL')"
+          }
+        ],
+        "title": "Transaction Count by Currency",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "ff027gte9a9kwc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "ARS"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": []
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 12,
+          "x": 0,
+          "y": 7
+        },
+        "id": 1,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "ARS",
+            "target": "alias(stats.gauges.arvault.exchange.volume.ARS,\"ARS\")",
+            "textEditor": true
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "USD",
+            "target": "alias(stats.gauges.arvault.exchange.volume.USD, 'USD')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "EUR",
+            "target": "alias(stats.gauges.arvault.exchange.volume.EUR, 'EUR')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "BRL",
+            "target": "alias(stats.gauges.arvault.exchange.volume.BRL, 'BRL')"
+          }
+        ],
+        "title": "Exchange Volume by Currency",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "ff027gte9a9kwc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 12,
+          "x": 12,
+          "y": 7
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "A",
+            "target": "alias(stats.gauges.arvault.exchange.net.ARS, 'ARS')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "B",
+            "target": "alias(stats.gauges.arvault.exchange.net.USD, 'USD')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "C",
+            "target": "alias(stats.gauges.arvault.exchange.net.EUR, 'EUR')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "D",
+            "target": "alias(stats.gauges.arvault.exchange.net.BRL, 'BRL')"
+          }
+        ],
+        "title": "Net Position by Currency (Positive = Incoming, Negative = Outgoing)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "ff027gte9a9kwc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 0,
+          "y": 10
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "A",
+            "target": "alias(stats_counts.arvault.exchange.buy.ARS, 'ARS')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "B",
+            "target": "alias(stats_counts.arvault.exchange.buy.USD, 'USD')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "C",
+            "target": "alias(stats_counts.arvault.exchange.buy.EUR, 'EUR')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "D",
+            "target": "alias(stats_counts.arvault.exchange.buy.BRL, 'BRL')"
+          }
+        ],
+        "title": "Buy Operations by Currency",
+        "type": "piechart"
+      },
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "ff027gte9a9kwc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 6,
+          "y": 10
+        },
+        "id": 9,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "A",
+            "target": "alias(stats_counts.arvault.exchange.sell.ARS, 'ARS')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "B",
+            "target": "alias(stats_counts.arvault.exchange.sell.USD, 'USD')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "C",
+            "target": "alias(stats_counts.arvault.exchange.sell.EUR, 'EUR')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "D",
+            "target": "alias(stats_counts.arvault.exchange.sell.BRL, 'BRL')"
+          }
+        ],
+        "title": "Sell Operations by Currency",
+        "type": "piechart"
+      },
+      {
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 18
+        },
+        "id": 12,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "<div style=\"font-family: monospace; font-size: 12px; line-height: 1.4;\">\n<h3 style=\"color: #00ff00; margin-bottom: 10px;\">📊 Transaction Log Access</h3>\n<div style=\"background: #1f1f1f; padding: 15px; border-radius: 5px;\">\n<div style=\"color: #00ff00; margin-bottom: 10px;\">✅ API Endpoint: <code>curl http://localhost:5555/log</code></div>\n<div style=\"color: #ffaa00; margin-bottom: 10px;\">📝 Recent Transaction Example:</div>\n<div style=\"color: #ccc; margin-left: 20px; margin-bottom: 5px;\">• <strong>Time:</strong> 2025-10-09T04:13:55.721Z</div>\n<div style=\"color: #ccc; margin-left: 20px; margin-bottom: 5px;\">• <strong>Exchange:</strong> USD → ARS (100 → 1,469,000)</div>\n<div style=\"color: #ccc; margin-left: 20px; margin-bottom: 5px;\">• <strong>Rate:</strong> 1469</div>\n<div style=\"color: #ccc; margin-left: 20px; margin-bottom: 5px;\">• <strong>Status:</strong> ✅ Success</div>\n<div style=\"color: #888; margin-top: 10px; font-size: 11px;\">💡 Use the API endpoint above to view full transaction history</div>\n</div>\n</div>",
+          "mode": "html"
+        },
+        "pluginVersion": "11.5.2",
+        "title": "Transaction Log Information",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "ff027gte9a9kwc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Currency"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 100
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Buy Count"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "continuous-GrYlRd"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Sell Count"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "continuous-GrYlRd"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Volume"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 150
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Net Position"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 150
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "continuous-GrYlRd"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 18
+        },
+        "id": 13,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": true
+          },
+          "frameIndex": 9,
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "A",
+            "target": "alias(stats_counts.arvault.exchange.transactions.ARS, 'ARS Transactions')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "B",
+            "target": "alias(stats_counts.arvault.exchange.transactions.USD, 'USD Transactions')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "C",
+            "target": "alias(stats_counts.arvault.exchange.transactions.EUR, 'EUR Transactions')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "D",
+            "target": "alias(stats_counts.arvault.exchange.transactions.BRL, 'BRL Transactions')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "E",
+            "target": "alias(stats_counts.arvault.exchange.buy.ARS, 'ARS Buy')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "F",
+            "target": "alias(stats_counts.arvault.exchange.buy.USD, 'USD Buy')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "G",
+            "target": "alias(stats_counts.arvault.exchange.buy.EUR, 'EUR Buy')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "H",
+            "target": "alias(stats_counts.arvault.exchange.buy.BRL, 'BRL Buy')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "I",
+            "target": "alias(stats_counts.arvault.exchange.sell.ARS, 'ARS Sell')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "J",
+            "target": "alias(stats_counts.arvault.exchange.sell.USD, 'USD Sell')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "K",
+            "target": "alias(stats_counts.arvault.exchange.sell.EUR, 'EUR Sell')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "ff027gte9a9kwc"
+            },
+            "refCount": 0,
+            "refId": "L",
+            "target": "alias(stats_counts.arvault.exchange.sell.BRL, 'BRL Sell')"
+          }
+        ],
+        "title": "Currency Exchange Summary Table",
+        "type": "table"
+      }
+    ],
+    "preload": false,
+    "refresh": "5s",
+    "schemaVersion": 40,
+    "tags": [
+      "arvault",
+      "business",
+      "metrics"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "ArVault Business Metrics Dashboard",
+    "uid": "ff0i0is42jqpsf",
+    "version": 2,
+    "weekStart": ""
+  }

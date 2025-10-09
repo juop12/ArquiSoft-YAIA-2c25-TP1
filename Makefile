@@ -27,6 +27,9 @@ setup-dashboard: ## Updates the datasource UID in the Grafana dashboard
 import-dashboard: ## Imports the updated dashboard to Grafana automatically
 	@./scripts/import-dashboard.sh
 
+import-business-dashboard: ## Imports the business metrics dashboard to Grafana
+	@./scripts/import-business-dashboard.sh
+
 full-setup: up setup-dashboard import-dashboard ## Deploys the entire system and configures Grafana automatically
 	@echo "System fully configured."
 
@@ -77,3 +80,9 @@ test-burst:
 test-business:
 	@echo "Running business metrics test..."
 	cd perf && npm run business
+
+test-business-metrics: ## Runs comprehensive business metrics test
+	@./scripts/test-business-metrics.sh
+
+quick-business-test: ## Runs quick business metrics test
+	@./scripts/quick-business-test.sh

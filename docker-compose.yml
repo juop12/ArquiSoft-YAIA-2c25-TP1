@@ -51,7 +51,7 @@ services:
             - "8080:8080"
         volumes:
             - "/:/rootfs:ro"
-            - ${COMPOSE_CADVISOR_PATH}
+            - "${COMPOSE_CADVISOR_PATH}"
             - "/sys:/sys:ro"
             - "/var/lib/docker/:/var/lib/docker:ro"
 

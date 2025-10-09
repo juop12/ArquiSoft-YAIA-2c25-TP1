@@ -21,6 +21,21 @@ export async function init() {
   accounts = stateAccounts();
   rates = stateRates();
   log = stateLog();
+  
+  // Start periodic balance tracking for business metrics
+  startBalanceTracking();
+}
+
+// Track available balances periodically for business metrics
+function startBalanceTracking() {
+  setInterval(() => {
+    if (accounts) {
+      accounts.forEach(account => {
+        // Track available balance for each currency
+        statsd.gauge(`balance.${account.currency}`, account.balance);
+      });
+    }
+  }, 10000); // Update every 10 seconds
 }
 
 //returns all internal accounts
@@ -127,6 +142,19 @@ export async function exchange(exchangeRequest) {
     // Track net position (base currency: positive for incoming, counter currency: negative for outgoing)
     statsd.gauge(`net.${baseCurrency}`, baseAmount);
     statsd.gauge(`net.${counterCurrency}`, -counterAmount);
+    
+    // Track buy/sell direction for business metrics
+    // When client exchanges baseCurrency -> counterCurrency, they are BUYING counterCurrency
+    statsd.increment(`buy.${counterCurrency}`);
+    statsd.gauge(`buy_amount.${counterCurrency}`, counterAmount);
+    
+    // When client exchanges baseCurrency -> counterCurrency, they are SELLING baseCurrency
+    statsd.increment(`sell.${baseCurrency}`);
+    statsd.gauge(`sell_amount.${baseCurrency}`, baseAmount);
+    
+    // Track transaction count per currency
+    statsd.increment(`transactions.${baseCurrency}`);
+    statsd.increment(`transactions.${counterCurrency}`);
     
     // Track exchange rate
     statsd.gauge(`rate.${baseCurrency}_${counterCurrency}`, exchangeRate);
